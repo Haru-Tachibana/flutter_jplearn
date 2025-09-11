@@ -1,0 +1,62 @@
+name: jpsong_learn
+description: Learn Japanese through music
+
+environment:
+  sdk: '>=3.9.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management  
+  flutter_riverpod: ^2.4.9
+  state_notifier: ^1.0.0
+
+  # Audio & Media
+  just_audio: ^0.10.5
+  just_audio_background: ^0.0.1-beta.11
+  audio_session: ^0.2.2
+  video_player: ^2.8.1
+
+  # Network & API
+  http: ^1.1.0
+  dio: ^5.3.2
+  connectivity_plus: ^6.1.5
+
+  # Local Storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.2.2
+
+  # UI & Animation
+  animations: ^2.0.8
+  flutter_staggered_animations: ^1.1.1
+  cached_network_image: ^3.3.0
+  shimmer: ^3.0.0
+
+  # Accessibility & Internationalization
+  flutter_tts: ^4.2.3
+  speech_to_text: ^7.3.0
+
+  # Japanese Text Processing
+  kana_kit: ^2.0.0
+
+  # Utilities
+  path_provider: ^2.1.1
+  url_launcher: ^6.2.1
+  share_plus: ^11.1.0
+  package_info_plus: ^8.3.1
+  json_annotation: ^4.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.7
+  json_serializable: ^6.7.1
+  mockito: ^5.4.2
+  integration_test:
+    sdk: flutter
