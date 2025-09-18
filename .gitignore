@@ -43,3 +43,28 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+# Flutter build
+build/
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+
+# IDE files
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+
+# Env secrets
+lib/env/env.dart
+.env
+.env.*.local
+.env.local
+.env.*.secret
+.env.secret
+.env.*.example
+.env.example        

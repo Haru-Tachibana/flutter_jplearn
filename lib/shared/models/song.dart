@@ -1,3 +1,5 @@
+// lib/shared/models/song.dart
+
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -8,32 +10,29 @@ part 'song.g.dart';
 class Song {
   @HiveField(0)
   final String id;
-  
+
   @HiveField(1)
   final String title;
-  
+
   @HiveField(2)
   final String artist;
-  
+
   @HiveField(3)
   final String? albumArt;
-  
+
   @HiveField(4)
   final Duration duration;
-  
+
   @HiveField(5)
   final List<VideoSource> videoSources;
-  
+
   @HiveField(6)
-  final JLPTLevel difficulty;
-  
-  @HiveField(7)
   final List<String> tags;
-  
-  @HiveField(8)
+
+  @HiveField(7)
   final DateTime? lastPlayed;
-  
-  @HiveField(9)
+
+  @HiveField(8)
   final bool isDownloaded;
 
   const Song({
@@ -43,7 +42,6 @@ class Song {
     this.albumArt,
     required this.duration,
     required this.videoSources,
-    required this.difficulty,
     required this.tags,
     this.lastPlayed,
     this.isDownloaded = false,
@@ -63,18 +61,4 @@ enum VideoSource {
   neteaseMusic,
   @HiveField(3)
   local,
-}
-
-@HiveType(typeId: 2)
-enum JLPTLevel {
-  @HiveField(0)
-  n5,
-  @HiveField(1)
-  n4,
-  @HiveField(2)
-  n3,
-  @HiveField(3)
-  n2,
-  @HiveField(4)
-  n1,
 }

@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'app.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Load .env file
+  await dotenv.load(fileName: ".env");
 
   // Initialize Hive
   await Hive.initFlutter();
 
   // Set preferred orientations
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
@@ -25,7 +27,7 @@ void main() async {
 
   runApp(
     const ProviderScope(
-      child: JpSongLearnApp(), // 👈 Now theme is handled inside app.dart
+      child: JpSongLearnApp(), // defined in app.dart
     ),
   );
 }

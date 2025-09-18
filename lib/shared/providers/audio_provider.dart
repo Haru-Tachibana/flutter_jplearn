@@ -1,34 +1,27 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:jpsong_learn/core/services/audio_service.dart';
-import 'package:jpsong_learn/shared/models/song.dart';
 
-final audioServiceProvider = Provider<AudioService>((ref) {
-  return AudioService();
-});
+class AudioState {
+  final bool isPlaying;
+  final String? currentSongId;
 
-final currentSongProvider = StateNotifierProvider<CurrentSongNotifier, Song?>(
-  (ref) => CurrentSongNotifier(),
-);
+  const AudioState({this.isPlaying = false, this.currentSongId});
+}
 
-final playbackStateProvider = StreamProvider<PlayerState>((ref) {
-  final audioService = ref.watch(audioServiceProvider);
-  return audioService.playerStateStream;
-});
+class AudioNotifier extends StateNotifier<AudioState> {
+  AudioNotifier() : super(const AudioState());
 
-final positionProvider = StreamProvider<Duration>((ref) {
-  final audioService = ref.watch(audioServiceProvider);
-  return audioService.positionStream;
-});
-
-class CurrentSongNotifier extends StateNotifier<Song?> {
-  CurrentSongNotifier() : super(null);
-
-  void setSong(Song song) {
-    state = song;
+  void play(String songId) {
+    state = AudioState(isPlaying: true, currentSongId: songId);
   }
 
-  void clearSong() {
-    state = null;
+  void pause() {
+    state = AudioState(isPlaying: false, currentSongId: state.currentSongId);
+  }
+
+  void stop() {
+    state = const AudioState();
   }
 }
+
+final audioProvider =
+    StateNotifierProvider<AudioNotifier, AudioState>((ref) => AudioNotifier());

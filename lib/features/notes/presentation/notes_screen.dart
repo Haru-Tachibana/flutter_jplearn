@@ -222,7 +222,7 @@ class _NotesScreenState extends ConsumerState<NotesScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: scheme.primary.withOpacity(0.1),
+        color: scheme.primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Text(
@@ -278,7 +278,7 @@ class _NotesScreenState extends ConsumerState<NotesScreen>
                       _selectedFilter = 'All';
                     });
                   },
-                  backgroundColor: scheme.primary.withOpacity(0.1),
+                  backgroundColor: scheme.primary.withValues(alpha: 0.1),
                   labelStyle: TextStyle(color: scheme.primary),
                   deleteIconColor: scheme.primary,
                 ),
@@ -313,7 +313,7 @@ class _NotesScreenState extends ConsumerState<NotesScreen>
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: needsReview ? scheme.error.withOpacity(0.3) : Colors.grey[200]!,
+          color: needsReview ? scheme.error.withValues(alpha: 0.3) : Colors.grey[200]!,
           width: needsReview ? 2 : 1,
         ),
       ),
@@ -466,7 +466,7 @@ class _NotesScreenState extends ConsumerState<NotesScreen>
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: _getStatusColor(vocab['reviewStatus']).withOpacity(0.1),
+                      color: _getStatusColor(vocab['reviewStatus']).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -495,7 +495,7 @@ class _NotesScreenState extends ConsumerState<NotesScreen>
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: scheme.error.withOpacity(0.1),
+                        color: scheme.error.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -534,8 +534,8 @@ class _NotesScreenState extends ConsumerState<NotesScreen>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  scheme.primary.withOpacity(0.1),
-                  scheme.secondary.withOpacity(0.1),
+                  scheme.primary.withValues(alpha: 0.1),
+                  scheme.secondary.withValues(alpha: 0.1),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -687,7 +687,7 @@ class _NotesScreenState extends ConsumerState<NotesScreen>
         leading: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: scheme.primary.withOpacity(0.1),
+            color: scheme.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(
@@ -936,39 +936,46 @@ class _NotesScreenState extends ConsumerState<NotesScreen>
   }
 
   void _showFilterDialog(BuildContext context, ColorScheme scheme) {
+    final filters = [
+      'All',
+      'N5',
+      'N4',
+      'N3',
+      'N2',
+      'N1',
+      'New Word',
+      'Learning',
+      'Review',
+      'Mastered',
+    ];
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Filter Vocabulary'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            'All',
-            'N5',
-            'N4',
-            'N3',
-            'N2',
-            'N1',
-            'New Word',
-            'Learning',
-            'Review',
-            'Mastered',
-          ].map((filter) => RadioListTile<String>(
+        content: RadioGroup<String>(
+          groupValue: _selectedFilter, // ✅ correct usage
+          onChanged: (value) {
+            setState(() {
+              _selectedFilter = value!; // ✅ fix nullability
+            });
+            Navigator.pop(context); // close dialog after selecting
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: filters.map((filter) {
+              return RadioListTile<String>(
                 title: Text(filter),
                 value: filter,
-                groupValue: _selectedFilter,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedFilter = value!;
-                  });
-                  Navigator.pop(context);
-                },
-                activeColor: scheme.primary,
-              )).toList(),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
   }
+
+
 
   void _showStatsDialog(BuildContext context, ColorScheme scheme) {
     showDialog(

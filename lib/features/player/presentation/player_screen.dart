@@ -219,15 +219,15 @@ class _MusicPlayerScreenState extends ConsumerState<MusicPlayerScreen>
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
                           colors: [
-                            scheme.primary.withOpacity(0.8),
-                            scheme.secondary.withOpacity(0.6),
+                            scheme.primary.withValues(alpha: 0.8),
+                            scheme.secondary.withValues(alpha: 0.6),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: scheme.primary.withOpacity(0.3),
+                            color: scheme.primary.withValues(alpha: 0.3),
                             blurRadius: 30,
                             spreadRadius: 5,
                           ),
@@ -240,7 +240,7 @@ class _MusicPlayerScreenState extends ConsumerState<MusicPlayerScreen>
                                 fit: BoxFit.cover,
                               ),
                             )
-                          : Icon(
+                          : const Icon(
                               Icons.music_note,
                               size: 80,
                               color: Colors.white,
@@ -484,14 +484,14 @@ class _MusicPlayerScreenState extends ConsumerState<MusicPlayerScreen>
       margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isCurrentLine ? scheme.primary.withOpacity(0.1) : Colors.white,
+        color: isCurrentLine ? scheme.primary.withValues(alpha: 0.1) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: isCurrentLine 
             ? Border.all(color: scheme.primary, width: 2)
             : Border.all(color: Colors.grey[200]!, width: 1),
         boxShadow: isCurrentLine ? [
           BoxShadow(
-            color: scheme.primary.withOpacity(0.2),
+            color: scheme.primary.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -629,7 +629,7 @@ class _MusicPlayerScreenState extends ConsumerState<MusicPlayerScreen>
                 setState(() => showFurigana = value);
                 Navigator.pop(context);
               },
-              activeColor: scheme.primary,
+              activeThumbColor: scheme.primary,
             ),
             
             SwitchListTile(
@@ -640,7 +640,7 @@ class _MusicPlayerScreenState extends ConsumerState<MusicPlayerScreen>
                 setState(() => showRomaji = value);
                 Navigator.pop(context);
               },
-              activeColor: scheme.primary,
+              activeThumbColor: scheme.primary,
             ),
             
             SwitchListTile(
@@ -651,7 +651,7 @@ class _MusicPlayerScreenState extends ConsumerState<MusicPlayerScreen>
                 setState(() => showTranslation = value);
                 Navigator.pop(context);
               },
-              activeColor: scheme.primary,
+              activeThumbColor: scheme.primary,
             ),
             
             const SizedBox(height: 20),
